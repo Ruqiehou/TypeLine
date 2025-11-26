@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Typeline 编程语言 - 语法手册</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 0;
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        .card h2 {
+            color: #4a5568;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .code-block {
+            background: #1a202c;
+            color: #cbd5e0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.95em;
+            overflow-x: auto;
+        }
+        
+        .keyword { color: #ff79c6; }
+        .type { color: #8be9fd; }
+        .string { color: #f1fa8c; }
+        .number { color: #bd93f9; }
+        .comment { color: #6272a4; }
+        
+        .example {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: #48bb78;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: white;
+            font-size: 2.5em;
+            margin: 50px 0 30px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Typeline 编程语言</h1>
+            <p>简洁 · 强大 · 函数式优先的现代编程语言</p>
+        </div>
+
+        <!-- 基础语法部分 -->
+        <h2 class="section-title">基础语法</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h2>变量声明</h2>
+                <div class="code-block">
+<span class="keyword">intnum</span> age = <span class="number">25</span><br>
+<span class="keyword">suinum</span> price = <span class="number">99.99</span><br>
+<span class="keyword">word</span> name = <span class="string">"Alice"</span><br>
+<span class="keyword">daco</span> is_valid = <span class="keyword">true</span>
+                </div>
+                <p><strong>格式：</strong>变量类型 变量名 赋值符号 变量值</p>
+            </div>
+
+            <div class="card">
+                <h2>集合类型</h2>
+                <div class="code-block">
+<span class="comment">// 有序可变</span><br>
+<span class="keyword">list</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]<br><br>
+
+<span class="comment">// 无序可变</span><br>
+<span class="keyword">lisp</span> data = (<span class="number">1</span>, <span class="string">"hello"</span>, <span class="keyword">true</span>)<br><br>
+
+<span class="comment">// 有序不可变</span><br>
+<span class="keyword">lisk</span> fixed_list = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]<br><br>
+
+<span class="comment">// 无序不可变</span><br>
+<span class="keyword">lisf</span> fixed_set = (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>输出语句</h2>
+                <div class="code-block">
+<span class="keyword">print</span> <span class="string">"Hello World"</span><br>
+<span class="keyword">print</span> <span class="string">"x ="</span>, x, <span class="string">"y ="</span>, y<br>
+<span class="keyword">print</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]
+                </div>
+                <p>简洁的 print 语句，无需括号</p>
+            </div>
+        </div>
+
+        <!-- 运算和逻辑部分 -->
+        <h2 class="section-title">运算与逻辑</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h2>算术运算</h2>
+                <div class="code-block">
+<span class="number">5</span> + <span class="number">3</span>    <span class="comment">// 加法</span><br>
+<span class="number">10</span> - <span class="number">4</span>   <span class="comment">// 减法</span><br>
+<span class="number">6</span> * <span class="number">7</span>    <span class="comment">// 乘法</span><br>
+<span class="number">15</span> / <span class="number">4</span>   <span class="comment">// 除法</span><br>
+<span class="number">17</span> % <span class="number">5</span>   <span class="comment">// 取模</span><br>
+<span class="number">2</span> ** <span class="number">3</span>   <span class="comment">// 幂运算</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>比较运算</h2>
+                <div class="code-block">
+x == y    <span class="comment">// 等于</span><br>
+x != y    <span class="comment">// 不等于</span><br>
+x > y     <span class="comment">// 大于</span><br>
+x < y     <span class="comment">// 小于</span><br>
+x >= y    <span class="comment">// 大于等于</span><br>
+x <= y    <span class="comment">// 小于等于</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>逻辑运算</h2>
+                <div class="code-block">
+a <span class="keyword">and</span> b    <span class="comment">// 逻辑与</span><br>
+a <span class="keyword">or</span> b     <span class="comment">// 逻辑或</span><br>
+a <span class="keyword">fep</span> b    <span class="comment">// 非此（前者真且后者假）</span><br>
+a <span class="keyword">fet</span> b    <span class="comment">// 非彼（前者假且后者真）</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 控制结构部分 -->
+        <h2 class="section-title">控制结构</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h2>条件分支</h2>
+                <div class="code-block">
+<span class="keyword">if</span> score >= <span class="number">90</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">print</span> <span class="string">"优秀"</span><br>
+} <span class="keyword">elif</span> score >= <span class="number">80</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">print</span> <span class="string">"良好"</span><br>
+} <span class="keyword">else</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">print</span> <span class="string">"继续努力"</span><br>
+}
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>循环结构</h2>
+                <div class="code-block">
+<span class="comment">// for循环 - 可提前返回</span><br>
+<span class="keyword">for</span> <span class="keyword">intnum</span> i = <span class="number">0</span>; i < <span class="number">10</span>; i = i + <span class="number">1</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> i == <span class="number">5</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> i<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}<br><br>
+
+<span class="comment">// while循环 - 可中途跳出</span><br>
+<span class="keyword">while</span> condition {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> exit_condition {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">whilebreak</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>函数定义</h2>
+                <div class="code-block">
+<span class="keyword">func</span> 计算平方(<span class="keyword">intnum</span> x) <span class="keyword">intnum</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> x * x<br>
+}<br><br>
+
+<span class="keyword">func</span> 复杂逻辑(<span class="keyword">list</span> data) <span class="keyword">string</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> len(data) == <span class="number">0</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"空"</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 更多逻辑...</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"结果"</span><br>
+}
+                </div>
+            </div>
+        </div>
+
+        <!-- 特性总结 -->
+        <h2 class="section-title">语言特性</h2>
+        <div class="card-grid">
+            <div class="card">
+                <h2>函数式特性</h2>
+                <ul class="feature-list">
+                    <li>函数作为一等公民</li>
+                    <li>不可变数据结构</li>
+                    <li>高阶函数支持</li>
+                    <li>纯函数鼓励</li>
+                    <li>函数可以作为集合元素</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>类型系统</h2>
+                <ul class="feature-list">
+                    <li>强类型变量声明</li>
+                    <li>丰富的集合类型</li>
+                    <li>类型安全的操作</li>
+                    <li>自动类型推断（计划中）</li>
+                    <li>泛型支持（计划中）</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h2>语法设计</h2>
+                <ul class="feature-list">
+                    <li>简洁直观的语法</li>
+                    <li>最小化语法噪音</li>
+                    <li>一致的命名规范</li>
+                    <li>易于学习和阅读</li>
+                    <li>强大的表达能力</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 完整示例 -->
+        <div class="card">
+            <h2>完整示例</h2>
+            <div class="code-block">
+<span class="comment">// 定义一个处理函数</span><br>
+<span class="keyword">func</span> 处理数据(<span class="keyword">list</span> numbers) <span class="keyword">string</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">intnum</span> 正数 = <span class="number">0</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">intnum</span> 负数 = <span class="number">0</span><br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 遍历统计</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> <span class="keyword">intnum</span> i = <span class="number">0</span>; i < len(numbers); i = i + <span class="number">1</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> numbers[i] > <span class="number">0</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;正数 = 正数 + <span class="number">1</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">elif</span> numbers[i] < <span class="number">0</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;负数 = 负数 + <span class="number">1</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 返回分析结果</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> 正数 > 负数 {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"正向趋势"</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">elif</span> 负数 > 正数 {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"负向趋势"</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"平衡状态"</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+}<br><br>
+
+<span class="comment">// 使用示例</span><br>
+<span class="keyword">list</span> 测试数据 = [<span class="number">1</span>, -<span class="number">2</span>, <span class="number">3</span>, -<span class="number">4</span>, <span class="number">5</span>]<br>
+<span class="keyword">string</span> 结果 = 处理数据(测试数据)<br>
+<span class="keyword">print</span> <span class="string">"分析结果:"</span>, 结果
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Typeline编程语言 - 设计文档 v1.0</p>
+            <p>简洁 · 强大 · 函数式优先</p>
+        </div>
+    </div>
+
+    <script>
+        // 简单的交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
